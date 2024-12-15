@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b052ad49e23d31e4c8fa32f5a78c1d49, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  damage:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  critical:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  cool:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  armor:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  health:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  healthRegen:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  duration:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  speed:
+  - 5
+  - 2
+  - 3
+  - 4
+  - 5
+  skill1Name: 
+  skill1Dec: 
+  skill1cool:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill1length:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill1count:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill1damage:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill2Name: 
+  skill2Dec: 
+  skill2cool:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill2length:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill2count:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill2damage:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill3Name: 
+  skill3Dec: 
+  skill3cool:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill3length:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill3count:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill3damage:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill4Name: 
+  skill4Dec: 
+  skill4cool:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill4length:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill4count:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill4damage:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill5Name: 
+  skill5Dec: 
+  skill5cool:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill5length:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill5count:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  skill5damage:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
