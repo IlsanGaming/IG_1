@@ -15,6 +15,10 @@ public class EnemyData : ScriptableObject
     public float[] health;
     [Header("#레벨별 이동속도")]
     public float[] speed;
+    [Header("#레벨별 넉백 지속시간")]
+    public float[] time;
+    [Header("#레벨별 넉백 저항도(높을수록 약함)")]
+    public float[] lightness;
     [Header("#적 ID")]
     public int id;
 
@@ -27,4 +31,6 @@ public class EnemyData : ScriptableObject
     public float[] skillcount;
     [Header("#공격 피해량")]
     public float[] skilldamage;
+    [Header("#처치시 경험치 드랍")]
+    public int[] exp;
 }

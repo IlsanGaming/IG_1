@@ -21,14 +21,14 @@ public class Spawner : MonoBehaviour
         timer += Time.deltaTime;
 
         // 데이터 범위 확인
-        if (GameManager.instance.level < data.Length)
+        if (GameManager.instance.Gamelevel < data.Length)
         {
-            EnemyData currentData = data[GameManager.instance.level];
+            EnemyData currentData = data[GameManager.instance.Gamelevel];
 
-            if (GameManager.instance.level < currentData.spawnTime.Length)
+            if (GameManager.instance.Gamelevel < currentData.spawnTime.Length)
             {
                 // 타이머가 현재 레벨의 스폰 타임을 초과하면 적 스폰
-                if (timer > currentData.spawnTime[GameManager.instance.level])
+                if (timer > currentData.spawnTime[GameManager.instance.Gamelevel])
                 {
                     Spawn();
                     timer = 0; // 타이머 초기화
@@ -39,7 +39,7 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
-        int level = GameManager.instance.level;
+        int level = GameManager.instance.Gamelevel;
 
         // 현재 레벨의 스폰 확률 가져오기
         if (level < spawnChancesData.spawnChancesList.Count)

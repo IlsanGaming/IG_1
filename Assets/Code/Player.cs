@@ -43,11 +43,13 @@ public class Player : MonoBehaviour
     Transform trans;
     Rigidbody2D rigid;
     public Animator anim;
+    public Scanner scanner;
     // Start is called before the first frame update
     void Awake()
     {
         rigid= GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
+        scanner = GetComponent<Scanner>();
         instance = this;
     }
 
@@ -62,34 +64,34 @@ public class Player : MonoBehaviour
     }
     public void GetStat()
     {
-         damage = data.damage[GameManager.instance.level];
-         critical = data.critical[GameManager.instance.level];
-         cool = data.cool[GameManager.instance.level];
-         armor= data.armor[GameManager.instance.level];
-         health = data.health[GameManager.instance.level];
-         healthRegen = data.healthRegen[GameManager.instance.level];
-         duration= data.duration[GameManager.instance.level];
-         speed = data.speed[GameManager.instance.level];
-         skill1cool= data.skill1cool[GameManager.instance.level];
-         skill1length= data.skill1length[GameManager.instance.level];
-         skill1count= data.skill1count[GameManager.instance.level];
-         skill1damage= data.skill1damage[GameManager.instance.level];
-         skill2cool= data.skill2cool[GameManager.instance.level];
-         skill2length= data.skill2length[GameManager.instance.level];
-         skill2count= data.skill2count[GameManager.instance.level];
-         skill2damage= data.skill2damage[GameManager.instance.level];
-         skill3cool = data.skill3cool[GameManager.instance.level];
-         skill3length = data.skill3length[GameManager.instance.level];
-         skill3count = data.skill3count[GameManager.instance.level];
-         skill3damage = data.skill3damage[GameManager.instance.level];
-         skill4cool = data.skill4cool[GameManager.instance.level];
-         skill4length = data.skill4length[GameManager.instance.level];
-         skill4count = data.skill4count[GameManager.instance.level];
-         skill4damage = data.skill4damage[GameManager.instance.level];
-         skill5cool = data.skill5cool[GameManager.instance.level];
-         skill5length = data.skill5length[GameManager.instance.level];
-         skill5count = data.skill5count[GameManager.instance.level];
-         skill5damage = data.skill5damage[GameManager.instance.level];
+         damage = data.damage[GameManager.instance.Gamelevel];
+         critical = data.critical[GameManager.instance.Gamelevel];
+         cool = data.cool[GameManager.instance.Gamelevel];
+         armor= data.armor[GameManager.instance.Gamelevel];
+         health = data.health[GameManager.instance.Gamelevel];
+         healthRegen = data.healthRegen[GameManager.instance.Gamelevel];
+         duration= data.duration[GameManager.instance.Gamelevel];
+         speed = data.speed[GameManager.instance.Gamelevel];
+         skill1cool= data.skill1cool[GameManager.instance.Gamelevel];
+         skill1length= data.skill1length[GameManager.instance.Gamelevel];
+         skill1count= data.skill1count[GameManager.instance.Gamelevel];
+         skill1damage= data.skill1damage[GameManager.instance.Gamelevel];
+         skill2cool= data.skill2cool[GameManager.instance.Gamelevel];
+         skill2length= data.skill2length[GameManager.instance.Gamelevel];
+         skill2count= data.skill2count[GameManager.instance.Gamelevel];
+         skill2damage= data.skill2damage[GameManager.instance.Gamelevel];
+         skill3cool = data.skill3cool[GameManager.instance.Gamelevel];
+         skill3length = data.skill3length[GameManager.instance.Gamelevel];
+         skill3count = data.skill3count[GameManager.instance.Gamelevel];
+         skill3damage = data.skill3damage[GameManager.instance.Gamelevel];
+         skill4cool = data.skill4cool[GameManager.instance.Gamelevel];
+         skill4length = data.skill4length[GameManager.instance.Gamelevel];
+         skill4count = data.skill4count[GameManager.instance.Gamelevel];
+         skill4damage = data.skill4damage[GameManager.instance.Gamelevel];
+         skill5cool = data.skill5cool[GameManager.instance.Gamelevel];
+         skill5length = data.skill5length[GameManager.instance.Gamelevel];
+         skill5count = data.skill5count[GameManager.instance.Gamelevel];
+         skill5damage = data.skill5damage[GameManager.instance.Gamelevel];
     }
     void Move()
     {

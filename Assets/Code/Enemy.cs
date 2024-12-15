@@ -13,12 +13,14 @@ public class Enemy : MonoBehaviour
     public float skillcount;
     public float skilldamage;
     public float spawnTime;
-    bool isLive;
+    public int exp;
+    public bool isLive;
 
     public Rigidbody2D target;
     public EnemyData data;
     public static Enemy instance;
     public Animator anim;
+    public bool isDamaged;
 
 
     Collider2D coll;
@@ -36,17 +38,20 @@ public class Enemy : MonoBehaviour
     {
         target = Player.instance.GetComponent<Rigidbody2D>();
         isLive = true;
+        isDamaged = false;
         coll.enabled = true;
         rigid.simulated = true;
         anim.SetBool("isDeath",false);
         anim.SetBool("1_Move", true);
-        damage = data.damage[GameManager.instance.level];
-        health= data.health[GameManager.instance.level];
-        speed= data.speed[GameManager.instance.level];
-        skillcool = data.skillcool[GameManager.instance.level];
-        skilllength = data.skilllength[GameManager.instance.level];
-        skillcount = data.skillcount[GameManager.instance.level];
-        skilldamage = data.skilldamage[GameManager.instance.level];
+        damage = data.damage[GameManager.instance.Gamelevel];
+        health= data.health[GameManager.instance.Gamelevel];
+        speed= data.speed[GameManager.instance.Gamelevel];
+        skillcool = data.skillcool[GameManager.instance.Gamelevel];
+        skilllength = data.skilllength[GameManager.instance.Gamelevel];
+        skillcount = data.skillcount[GameManager.instance.Gamelevel];
+        skilldamage = data.skilldamage[GameManager.instance.Gamelevel];
+        spawnTime= data.spawnTime[GameManager.instance.Gamelevel];
+        exp = data.exp[GameManager.instance.Gamelevel];
     }
 
     // Update is called once per frame
@@ -56,10 +61,14 @@ public class Enemy : MonoBehaviour
     }
     void Move()
     {
+        // "isDamaged" 상태에서 이동하지 않음
+        if (!isLive || isDamaged)
+            return;
+
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
-        rigid.velocity = Vector2.zero;
+        rigid.velocity = Vector2.zero; // 추가로 velocity 초기화 방지
     }
     void LateUpdate()
     {
@@ -80,14 +89,41 @@ public class Enemy : MonoBehaviour
             return;
         }
         health-=collision.GetComponent<Bullet>().damage;
+        StartCoroutine(knockBack());
         if(health > 0)
         {
-
+            anim.SetTrigger("3_Damaged");
         }
         else
         {
-            Dead();
+            isLive = false;
+            coll.enabled = false;
+            rigid.simulated = false;
+            anim.SetTrigger("4_Death");
+            GameManager.instance.GetExp(1);
+            Invoke("Dead",0.8f);
         }
+    }
+    IEnumerator knockBack()
+    {
+        isDamaged = true;
+
+        // 기존 속도 초기화
+        rigid.velocity = Vector2.zero;
+
+        // 넉백 방향 계산
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 dirVec = (transform.position - playerPos).normalized;
+
+        // 넉백 힘 적용
+        float knockBackForce = data.lightness[GameManager.instance.Gamelevel];
+        Debug.Log($"Knockback Direction: {dirVec}, Force: {knockBackForce}");
+        rigid.AddForce(dirVec * knockBackForce, ForceMode2D.Impulse);
+
+        // 대기 시간
+        yield return new WaitForSeconds(data.time[GameManager.instance.Gamelevel]);
+
+        isDamaged = false;
     }
     void Dead()
     {

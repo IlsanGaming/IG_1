@@ -7,18 +7,19 @@ public class PoolManager : MonoBehaviour
     // Enum 정의
     public enum PoolType
     {
-        Enemy1,
-        Enemy2,
-        Enemy3,
-        Enemy4,
-        Enemy5,
-        Enemy6,
-        Enemy7,
-        Enemy8,
-        Enemy9,
-        Enemy10,// 0
-        Bullet,     // 1
-        Explosion,  // 2
+        Enemy1,//0
+        Enemy2,//1
+        Enemy3,//2
+        Enemy4,//3
+        Enemy5,//4
+        Enemy6,//5
+        Enemy7,//6
+        Enemy8,//7
+        Enemy9,//8
+        Enemy10,//9
+        Melee,//10
+        Bullet,
+        Explosion,
         // 필요에 따라 추가
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8358697038824543521}
   - component: {fileID: 3907963502117343630}
   - component: {fileID: 7414156644594153423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -117,6 +117,7 @@ MonoBehaviour:
   skilllength: 0
   skillcount: 0
   skilldamage: 0
+  spawnTime: 0
   target: {fileID: 0}
   data: {fileID: 11400000, guid: 9e4247da9b0a05345a28609c4af1fd86, type: 2}
   anim: {fileID: 2181306080263980375}

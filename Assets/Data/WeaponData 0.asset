@@ -10,7 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1d5334ee39f0846a0b85ed24f190a8, type: 3}
-  m_Name: WeaponData
+  m_Name: WeaponData 0
   m_EditorClassIdentifier: 
-  speed: []
-  count: []
+  count: 0100000002000000030000000400000005000000
+  speed:
+  - -150
+  - -160
+  - -170
+  - -180
+  - -190
+  bulletspeed: []
+  per: 0500000005000000050000000500000005000000
