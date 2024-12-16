@@ -47,10 +47,10 @@ public class GameManager : MonoBehaviour
         // 경험치가 다음 레벨업 요구치를 충족하면 레벨업 처리
         if (exp > nextExp[Mathf.Min(Gamelevel, nextExp.Length - 1)])
         {
-            Gamelevel++; // 레벨 증가
+            Player.instance.playerlevel++; // 레벨 증가
             exp = nextExp[Mathf.Min(Gamelevel, nextExp.Length - 1)] - exp;
-            Debug.Log("현재 레벨 : " + Gamelevel);
-            Debug.Log("필요 경험치" + nextExp[Gamelevel]);
+            Debug.Log("현재 레벨 : " + Player.instance.playerlevel);
+            Debug.Log("필요 경험치" + nextExp[Player.instance.playerlevel]);
         }
     }
 }

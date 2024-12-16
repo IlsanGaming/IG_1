@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
+using static PoolManager;
 
 public class Weapon : MonoBehaviour
 {
@@ -21,91 +23,79 @@ public class Weapon : MonoBehaviour
         player = GetComponentInParent<Player>();
         instace = this;
     }
-
-    void OnEnable()
-    {
-
-    }
     // Update is called once per frame
     void Update()
     {
-        count = data.count[level];
-        speed = data.speed[level];
-        damage = playerData.damage[level];
-        switch (id)
+        count = data.count[Player.instance.playerlevel];
+        speed = data.speed[Player.instance.playerlevel];
+        damage = playerData.damage[Player.instance.playerlevel];
+        timer += Time.deltaTime;
+        if (timer > speed)
         {
-            case 0:
-                RotateIndependentOfScale();
-                break;
-            case 1:
-                timer += Time.deltaTime;
-                if (timer > speed)
-                {
-                    timer = 0f;
-                    Fire();
-                }
-                break;
-            default:
-                break;
+            timer = 0f;
+            Fire();
         }
         if (Input.GetButtonDown("Jump"))
         {
-            level++;
-            Init();
+            Player.instance.playerlevel++;
         }
 
-    }
-    public void Init()
-    {
-        switch (id)
-        {
-            case 0:
-                Batch();
-                break;
-            default:
-                break;
-        }
-    }
-    public void Batch()
-    {
-        for (int index = 0; index < count; index++)
-        {
-            Transform Melee;
-            if (index < transform.childCount)
-            {
-                Melee = transform.GetChild(index);
-            }
-            else
-            {
-                Melee = GameManager.instance.pool.Get(PoolManager.PoolType.Melee).transform;
-            }
-            Melee.parent = transform;
-            Melee.localPosition = Vector3.zero;
-            Melee.localRotation = Quaternion.identity;
-            Vector3 rotVec = Vector3.forward * 360 * index / count;
-            Melee.Rotate(rotVec);
-            Melee.Translate(Melee.up * 1.5f, Space.World);
-            Melee.GetComponent<Bullet>().Init(Player.instance.damage, data.per[GameManager.instance.Gamelevel], Vector3.zero);//-1 is Infinity Per
-        }
-    }
-    void RotateIndependentOfScale()
-    {
-        float scaleFactor = Mathf.Sign(transform.lossyScale.x);
-
-        transform.Rotate(Vector3.back * speed * scaleFactor * Time.deltaTime);
     }
 
     void Fire()
     {
-        if (!player.scanner.nearestTarget)
-            return;
-        Vector3 targetPos = player.scanner.nearestTarget.position;
-        Vector3 dir = targetPos - transform.position;
-        dir = dir.normalized;
+        level = Player.instance.playerlevel;
+        switch (level)
+        {
+            case 0:
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.zero);
+                break;
+            case 1:
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.right * 0.1f);
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.left * 0.1f);
+                break;
+            case 2:
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.right * 0.1f);
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.right * 0.2f);
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.left * 0.1f);
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.left * 0.2f);
+                break;
+            case 3:
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.zero);
+                break;
+            case 4:
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.zero);
+                break;
+            case 5:
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.zero);
+                break;
+            case 6:
+                Createbullet(PoolManager.PoolType.Bullet1, Vector3.zero);
+                break;
+        }
+    }
+    void Createbullet(PoolType type, Vector3 offset)
+    {
+        if (player.scanner.nearestTarget == null)
+        {
+            Debug.LogWarning("No target found for Createbullet");
+            return; // 타겟이 없으면 총알을 발사하지 않음
+        }
 
-        Transform bullet = GameManager.instance.pool.Get(PoolManager.PoolType.Bullet).transform;
-        bullet.position = transform.position;
+        Vector3 targetPos = player.scanner.nearestTarget.position;
+        Vector3 dir = (targetPos - transform.position).normalized;
+
+        if (GameManager.instance.pool == null)
+        {
+            Debug.LogError("PoolManager is not initialized");
+            return;
+        }
+
+        Transform bullet = GameManager.instance.pool.Get(PoolManager.PoolType.Bullet1).transform;
+        bullet.position = transform.position + offset;
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         bullet.GetComponent<Bullet>().Init(damage, count, dir);
     }
+
+
 }

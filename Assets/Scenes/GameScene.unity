@@ -573,7 +573,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8284690431070618562, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 556f9ef3400a3f8458e1932cb9c5e184, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -593,8 +593,8 @@ Transform:
   m_GameObject: {fileID: 280937936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2371074, y: -0.7964248, z: 0}
-  m_LocalScale: {x: 4, y: 2, z: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -21382,57 +21382,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 599958133}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &572985490
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 572985491}
-  - component: {fileID: 572985492}
-  m_Layer: 0
-  m_Name: Weapon0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &572985491
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572985490}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1528491625}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &572985492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572985490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3722d4810905e25459df41d3d242036d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  damage: 0
-  count: 0
-  speed: 0
-  data: {fileID: 11400000, guid: 88c39aaebcdccac4b86668e90947e214, type: 2}
-  playerData: {fileID: 11400000, guid: 96b58d744e64f5c45ba02e9166ee3d9e, type: 2}
-  level: 0
 --- !u!1 &599958132
 GameObject:
   m_ObjectHideFlags: 0
@@ -22540,24 +22489,7 @@ MonoBehaviour:
   speed: 0
   skill1cool: 0
   skill1length: 0
-  skill1count: 0
-  skill1damage: 0
-  skill2cool: 0
-  skill2length: 0
-  skill2count: 0
-  skill2damage: 0
-  skill3cool: 0
-  skill3length: 0
-  skill3count: 0
-  skill3damage: 0
-  skill4cool: 0
-  skill4length: 0
-  skill4count: 0
-  skill4damage: 0
-  skill5cool: 0
-  skill5length: 0
-  skill5count: 0
-  skill5damage: 0
+  playerlevel: 0
   inputVec: {x: 0, y: 0}
   data: {fileID: 11400000, guid: 96b58d744e64f5c45ba02e9166ee3d9e, type: 2}
   anim: {fileID: 1596453301}
@@ -22639,7 +22571,6 @@ Transform:
   m_Children:
   - {fileID: 1166150819}
   - {fileID: 15417871}
-  - {fileID: 572985491}
   - {fileID: 968465763}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -16,18 +16,30 @@ public class Scanner : MonoBehaviour
     // MonoBehaviour의 FixedUpdate(): 고정 프레임 간격으로 호출되며 물리 연산에 적합
     void FixedUpdate()
     {
-        // 원형 탐지를 수행하여 scanRange 내에 있는 targetLayer에 해당하는 모든 객체를 검색
         targets = Physics2D.CircleCastAll(
-            transform.position,  // 원의 중심 좌표 (현재 객체 위치)
-            scanRange,           // 탐지 범위 (반지름)
-            Vector2.zero,        // 방향 (0으로 설정하여 모든 방향 탐지)
-            0,                   // 거리 (사용하지 않음)
-            targetLayer          // 탐지 대상 레이어
+            transform.position,
+            scanRange,
+            Vector2.zero,
+            0,
+            targetLayer
         );
 
-        // 탐지된 객체 중 가장 가까운 객체를 찾아서 nearestTarget에 저장
         nearestTarget = GetNearest();
+
+        if (targets.Length == 0)
+        {
+            Debug.LogWarning("No targets found within scan range.");
+        }
+        else if (nearestTarget == null)
+        {
+            Debug.LogWarning("No nearest target found, but targets exist.");
+        }
+        else
+        {
+            Debug.Log($"Nearest target found at: {nearestTarget.position}");
+        }
     }
+
 
     // 탐지된 객체 중 가장 가까운 객체를 반환하는 함수
     Transform GetNearest()

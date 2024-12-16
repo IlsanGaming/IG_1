@@ -18,7 +18,7 @@ public class PoolManager : MonoBehaviour
         Enemy9,//8
         Enemy10,//9
         Melee,//10
-        Bullet,
+        Bullet1,//11
         Explosion,
         // 필요에 따라 추가
     }
