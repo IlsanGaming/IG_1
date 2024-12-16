@@ -1,4 +1,4 @@
-using System.Collections;
+癤퓎sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
     void Awake()
     {
         player = GetComponentInParent<Player>();
-        instace= this;
+        instace = this;
     }
 
     void OnEnable()
@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
                 break;
             case 1:
                 timer += Time.deltaTime;
-                if(timer>speed)
+                if (timer > speed)
                 {
                     timer = 0f;
                     Fire();
@@ -48,7 +48,7 @@ public class Weapon : MonoBehaviour
             default:
                 break;
         }
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             level++;
             Init();
@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
     }
     public void Init()
     {
-        switch(id)
+        switch (id)
         {
             case 0:
                 Batch();
@@ -66,35 +66,32 @@ public class Weapon : MonoBehaviour
                 break;
         }
     }
-    void Batch()
+    public void Batch()
     {
-        for(int index=0;index<count;index++)
+        for (int index = 0; index < count; index++)
         {
             Transform Melee;
-            if(index<transform.childCount)
+            if (index < transform.childCount)
             {
-                Melee=transform.GetChild(index);
+                Melee = transform.GetChild(index);
             }
             else
             {
-                Melee= GameManager.instance.pool.Get(PoolManager.PoolType.Melee).transform;
+                Melee = GameManager.instance.pool.Get(PoolManager.PoolType.Melee).transform;
             }
-            Melee.parent=transform;
-            Melee.localPosition= Vector3.zero;
-            Melee.localRotation= Quaternion.identity;
+            Melee.parent = transform;
+            Melee.localPosition = Vector3.zero;
+            Melee.localRotation = Quaternion.identity;
             Vector3 rotVec = Vector3.forward * 360 * index / count;
             Melee.Rotate(rotVec);
             Melee.Translate(Melee.up * 1.5f, Space.World);
-            Melee.GetComponent<Bullet>().Init(damage, -1,Vector3.zero);//-1 is Infinity Per
+            Melee.GetComponent<Bullet>().Init(Player.instance.damage, data.per[GameManager.instance.Gamelevel], Vector3.zero);//-1 is Infinity Per
         }
     }
-    // 부모의 scale 부호를 무시하고 회전
     void RotateIndependentOfScale()
     {
-        // 부모의 Scale X 부호를 가져오기
         float scaleFactor = Mathf.Sign(transform.lossyScale.x);
 
-        // 회전 방향을 Scale 부호와 무관하게 고정
         transform.Rotate(Vector3.back * speed * scaleFactor * Time.deltaTime);
     }
 
@@ -102,13 +99,13 @@ public class Weapon : MonoBehaviour
     {
         if (!player.scanner.nearestTarget)
             return;
-        Vector3 targetPos=player.scanner.nearestTarget.position;
-        Vector3 dir=targetPos-transform.position;
+        Vector3 targetPos = player.scanner.nearestTarget.position;
+        Vector3 dir = targetPos - transform.position;
         dir = dir.normalized;
 
-        Transform bullet= GameManager.instance.pool.Get(PoolManager.PoolType.Bullet).transform;
-        bullet.position= transform.position;
-        bullet.rotation = Quaternion.FromToRotation(Vector3.up,dir);
-        bullet.GetComponent<Bullet>().Init(damage,count, dir);
+        Transform bullet = GameManager.instance.pool.Get(PoolManager.PoolType.Bullet).transform;
+        bullet.position = transform.position;
+        bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.GetComponent<Bullet>().Init(damage, count, dir);
     }
 }

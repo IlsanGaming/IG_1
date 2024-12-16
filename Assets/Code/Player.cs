@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,7 +35,6 @@ public class Player : MonoBehaviour
     public float skill5count;
     public float skill5damage;
 
-
     public Vector2 inputVec;
     public PlayerData data;
     public static Player instance;
@@ -44,12 +42,13 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
     public Animator anim;
     public Scanner scanner;
-    // Start is called before the first frame update
+
     void Awake()
     {
-        rigid= GetComponent<Rigidbody2D>();
+        rigid = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         scanner = GetComponent<Scanner>();
+
         instance = this;
     }
 
@@ -58,60 +57,71 @@ public class Player : MonoBehaviour
     {
         Move();
     }
+
     void LateUpdate()
     {
         GetStat();
     }
+
     public void GetStat()
     {
-         damage = data.damage[GameManager.instance.Gamelevel];
-         critical = data.critical[GameManager.instance.Gamelevel];
-         cool = data.cool[GameManager.instance.Gamelevel];
-         armor= data.armor[GameManager.instance.Gamelevel];
-         health = data.health[GameManager.instance.Gamelevel];
-         healthRegen = data.healthRegen[GameManager.instance.Gamelevel];
-         duration= data.duration[GameManager.instance.Gamelevel];
-         speed = data.speed[GameManager.instance.Gamelevel];
-         skill1cool= data.skill1cool[GameManager.instance.Gamelevel];
-         skill1length= data.skill1length[GameManager.instance.Gamelevel];
-         skill1count= data.skill1count[GameManager.instance.Gamelevel];
-         skill1damage= data.skill1damage[GameManager.instance.Gamelevel];
-         skill2cool= data.skill2cool[GameManager.instance.Gamelevel];
-         skill2length= data.skill2length[GameManager.instance.Gamelevel];
-         skill2count= data.skill2count[GameManager.instance.Gamelevel];
-         skill2damage= data.skill2damage[GameManager.instance.Gamelevel];
-         skill3cool = data.skill3cool[GameManager.instance.Gamelevel];
-         skill3length = data.skill3length[GameManager.instance.Gamelevel];
-         skill3count = data.skill3count[GameManager.instance.Gamelevel];
-         skill3damage = data.skill3damage[GameManager.instance.Gamelevel];
-         skill4cool = data.skill4cool[GameManager.instance.Gamelevel];
-         skill4length = data.skill4length[GameManager.instance.Gamelevel];
-         skill4count = data.skill4count[GameManager.instance.Gamelevel];
-         skill4damage = data.skill4damage[GameManager.instance.Gamelevel];
-         skill5cool = data.skill5cool[GameManager.instance.Gamelevel];
-         skill5length = data.skill5length[GameManager.instance.Gamelevel];
-         skill5count = data.skill5count[GameManager.instance.Gamelevel];
-         skill5damage = data.skill5damage[GameManager.instance.Gamelevel];
+        damage = data.damage[GameManager.instance.Gamelevel];
+        critical = data.critical[GameManager.instance.Gamelevel];
+        cool = data.cool[GameManager.instance.Gamelevel];
+        armor = data.armor[GameManager.instance.Gamelevel];
+        health = data.health[GameManager.instance.Gamelevel];
+        healthRegen = data.healthRegen[GameManager.instance.Gamelevel];
+        duration = data.duration[GameManager.instance.Gamelevel];
+        speed = data.speed[GameManager.instance.Gamelevel];
+        skill1cool = data.skill1cool[GameManager.instance.Gamelevel];
+        skill1length = data.skill1length[GameManager.instance.Gamelevel];
+        skill1count = data.skill1count[GameManager.instance.Gamelevel];
+        skill1damage = data.skill1damage[GameManager.instance.Gamelevel];
+        skill2cool = data.skill2cool[GameManager.instance.Gamelevel];
+        skill2length = data.skill2length[GameManager.instance.Gamelevel];
+        skill2count = data.skill2count[GameManager.instance.Gamelevel];
+        skill2damage = data.skill2damage[GameManager.instance.Gamelevel];
+        skill3cool = data.skill3cool[GameManager.instance.Gamelevel];
+        skill3length = data.skill3length[GameManager.instance.Gamelevel];
+        skill3count = data.skill3count[GameManager.instance.Gamelevel];
+        skill3damage = data.skill3damage[GameManager.instance.Gamelevel];
+        skill4cool = data.skill4cool[GameManager.instance.Gamelevel];
+        skill4length = data.skill4length[GameManager.instance.Gamelevel];
+        skill4count = data.skill4count[GameManager.instance.Gamelevel];
+        skill4damage = data.skill4damage[GameManager.instance.Gamelevel];
+        skill5cool = data.skill5cool[GameManager.instance.Gamelevel];
+        skill5length = data.skill5length[GameManager.instance.Gamelevel];
+        skill5count = data.skill5count[GameManager.instance.Gamelevel];
+        skill5damage = data.skill5damage[GameManager.instance.Gamelevel];
     }
+
     void Move()
     {
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec); // 새로운 위치로 이동
-        anim.SetBool("1_Move", inputVec !=Vector2.zero);
+        anim.SetBool("1_Move", inputVec != Vector2.zero);
 
-        float scaleX;
-        // 수평 이동 입력에 따라 플레이어 스프라이트를 반전
-        if (inputVec.x >= -1 && inputVec.x < 0)
+        // 첫 번째 자식의 RectTransform Scale.x를 변경
+        if (transform.childCount > 0) // 자식이 있는지 확인
         {
-            scaleX = 1;
-            trans.localScale = new Vector3(scaleX, trans.localScale.y, trans.localScale.z);
-        }
-        else if (inputVec.x <= 1 && inputVec.x > 0)
-        {
-            scaleX = -1;
-            trans.localScale = new Vector3(scaleX, trans.localScale.y, trans.localScale.z);
+            Transform firstChild = transform.GetChild(0); // 첫 번째 자식 Transform 가져오기
+            RectTransform rectTransform = firstChild.GetComponent<RectTransform>();
+            if (rectTransform != null)
+            {
+                Vector3 scale = rectTransform.localScale;
+                if (inputVec.x < 0)
+                {
+                    scale.x = 1; // 왼쪽으로 이동 시 반전
+                }
+                else if (inputVec.x > 0)
+                {
+                    scale.x = -1; // 오른쪽으로 이동 시 정방향
+                }
+                rectTransform.localScale = scale;
+            }
         }
     }
+
     void OnMove(InputValue value)
     {
         inputVec = value.Get<Vector2>();
