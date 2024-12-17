@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af092ca2b147154b94607dcb3a7e840, type: 3}
+  m_Name: EnemyData 4
+  m_EditorClassIdentifier: 
+  spawnTime:
+  - 0.5
+  - 0.7
+  - 0.9
+  damage:
+  - 10
+  - 20
+  - 3
+  health:
+  - 1
+  - 2
+  - 3
+  speed:
+  - 2
+  - 3
+  - 4
+  time:
+  - 0.5
+  - 0.3
+  - 0.2
+  lightness:
+  - 10
+  - 9
+  - 8
+  id: 0
+  skillcool:
+  - 1
+  - 2
+  - 3
+  skillspeed:
+  - 1
+  - 2
+  - 3
+  skillcount:
+  - 1
+  - 2
+  - 3
+  skilldamage:
+  - 0
+  - 0
+  - 0
+  exp: 010000000200000003000000

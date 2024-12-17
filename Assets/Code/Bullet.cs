@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float damage;
+    public float slow;
     public int per;
 
     public WeaponData data;
@@ -17,13 +17,13 @@ public class Bullet : MonoBehaviour
 
     private void OnEnable()
     {
-        damage = Player.instance.damage;
+        slow = Player.instance.slow;
         per = data.per[GameManager.instance.Gamelevel];
     }
 
-    public void Init(float damage, int per, Vector3 dir)
+    public void Init(float slow, int per, Vector3 dir)
     {
-        damage = Player.instance.damage;
+        slow = Player.instance.slow;
         per = data.per[GameManager.instance.Gamelevel];
         if (per >= 0)
         {

@@ -15,40 +15,36 @@ MonoBehaviour:
   spawnChancesList:
   - levelName: 1
     chances:
-    - 1
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
   - levelName: 2
     chances:
-    - 0.7
-    - 0.3
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
   - levelName: 3
     chances:
-    - 0.7
-    - 0.3
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
   - levelName: 4
     chances:
-    - 0.7
-    - 0.3
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
   - levelName: 5
     chances:
-    - 0.7
-    - 0.3
-  - levelName: 6
-    chances:
-    - 0.7
-    - 0.3
-  - levelName: 7
-    chances:
-    - 0.7
-    - 0.3
-  - levelName: 8
-    chances:
-    - 0.7
-    - 0.3
-  - levelName: 9
-    chances:
-    - 0.7
-    - 0.3
-  - levelName: 10
-    chances:
-    - 0.7
-    - 0.3
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.2

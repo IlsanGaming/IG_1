@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
+    public static PoolManager instance;
     // Enum 정의
     public enum PoolType
     {
@@ -12,14 +13,13 @@ public class PoolManager : MonoBehaviour
         Enemy3,//2
         Enemy4,//3
         Enemy5,//4
-        Enemy6,//5
-        Enemy7,//6
-        Enemy8,//7
-        Enemy9,//8
-        Enemy10,//9
-        Melee,//10
-        Bullet1,//11
-        Explosion,
+        Melee,//5
+        Bullet1,//6
+        Explosion,//7
+        part,//8
+        heal,//9
+        jam,//10
+        enemyBullet1,//11
         // 필요에 따라 추가
     }
 
@@ -28,6 +28,7 @@ public class PoolManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         pools = new Dictionary<PoolType, List<GameObject>>();
 
         for (int i = 0; i < prefabs.Length; i++)
@@ -77,4 +78,10 @@ public class PoolManager : MonoBehaviour
             }
         }
     }
+    public void ReturnToPool(GameObject item, PoolType type)
+    {
+        item.SetActive(false);
+        pools[type].Add(item);
+    }
+
 }

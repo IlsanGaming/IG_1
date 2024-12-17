@@ -16,6 +16,10 @@ public class Scanner : MonoBehaviour
     // MonoBehaviour의 FixedUpdate(): 고정 프레임 간격으로 호출되며 물리 연산에 적합
     void FixedUpdate()
     {
+        if (!GameManager.instance.isLive)
+        {
+            return;
+        }
         targets = Physics2D.CircleCastAll(
             transform.position,
             scanRange,
@@ -25,19 +29,6 @@ public class Scanner : MonoBehaviour
         );
 
         nearestTarget = GetNearest();
-
-        if (targets.Length == 0)
-        {
-            Debug.LogWarning("No targets found within scan range.");
-        }
-        else if (nearestTarget == null)
-        {
-            Debug.LogWarning("No nearest target found, but targets exist.");
-        }
-        else
-        {
-            Debug.Log($"Nearest target found at: {nearestTarget.position}");
-        }
     }
 
 

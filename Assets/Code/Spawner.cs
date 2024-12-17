@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -7,31 +5,31 @@ public class Spawner : MonoBehaviour
     public Transform[] spawnPoint;
     public float timer;
     public EnemyData[] data;
-    public SpawnChancesData spawnChancesData; // 스폰 확률 데이터 (ScriptableObject)
-    // Start is called before the first frame update
+    public SpawnChancesData spawnChancesData;
+
     void Awake()
     {
-        spawnPoint=GetComponentsInChildren<Transform>();
+        spawnPoint = GetComponentsInChildren<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // 타이머 증가
+        if (!GameManager.instance.isLive)
+        {
+            return;
+        }
         timer += Time.deltaTime;
 
-        // 데이터 범위 확인
         if (GameManager.instance.Gamelevel < data.Length)
         {
             EnemyData currentData = data[GameManager.instance.Gamelevel];
 
             if (GameManager.instance.Gamelevel < currentData.spawnTime.Length)
             {
-                // 타이머가 현재 레벨의 스폰 타임을 초과하면 적 스폰
                 if (timer > currentData.spawnTime[GameManager.instance.Gamelevel])
                 {
                     Spawn();
-                    timer = 0; // 타이머 초기화
+                    timer = 0;
                 }
             }
         }
@@ -41,13 +39,25 @@ public class Spawner : MonoBehaviour
     {
         int level = GameManager.instance.Gamelevel;
 
-        // 현재 레벨의 스폰 확률 가져오기
         if (level < spawnChancesData.spawnChancesList.Count)
         {
             var spawnChances = spawnChancesData.spawnChancesList[level].chances;
 
-            // 적 스폰
-            PoolManager.PoolType[] enemyTypes = { PoolManager.PoolType.Enemy1, PoolManager.PoolType.Enemy2, PoolManager.PoolType.Enemy3 };
+            // 적 타입 배열을 5개로 확장
+            PoolManager.PoolType[] enemyTypes = {
+                PoolManager.PoolType.Enemy1,
+                PoolManager.PoolType.Enemy2,
+                PoolManager.PoolType.Enemy3,
+                PoolManager.PoolType.Enemy4,
+                PoolManager.PoolType.Enemy5
+            };
+
+            if (spawnChances.Length != enemyTypes.Length)
+            {
+                Debug.LogError("Spawn chances length does not match the number of enemy types.");
+                return;
+            }
+
             int selectedIndex = GetRandomEnemyIndex(spawnChances);
 
             if (selectedIndex != -1 && selectedIndex < enemyTypes.Length)
@@ -60,16 +70,32 @@ public class Spawner : MonoBehaviour
 
     int GetRandomEnemyIndex(float[] chances)
     {
-        float randomValue = Random.Range(0f, 1f); // 0.0 ~ 1.0
+        if (chances == null || chances.Length == 0)
+        {
+            Debug.LogError("Spawn chances are not defined or empty.");
+            return -1;
+        }
+
+        float totalChance = 0f;
+        foreach (var chance in chances)
+            totalChance += chance;
+
+        if (Mathf.Approximately(totalChance, 0f))
+        {
+            Debug.LogError("Total spawn chances cannot be zero.");
+            return -1;
+        }
+
+        float randomValue = Random.Range(0f, totalChance);
         float cumulative = 0f;
 
         for (int i = 0; i < chances.Length; i++)
         {
             cumulative += chances[i];
             if (randomValue <= cumulative)
-                return i; // 선택된 적 인덱스
+                return i;
         }
 
-        return -1; // 선택 실패
+        return -1;
     }
 }

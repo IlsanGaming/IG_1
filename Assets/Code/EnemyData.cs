@@ -25,8 +25,8 @@ public class EnemyData : ScriptableObject
 
     [Header("#공격 재사용 대기시간")]
     public float[] skillcool;
-    [Header("#공격 사정거리")]
-    public float[] skilllength;
+    [Header("#투사체 속도")]
+    public float[] skillspeed;
     [Header("#공격 시전횟수")]
     public float[] skillcount;
     [Header("#공격 피해량")]
